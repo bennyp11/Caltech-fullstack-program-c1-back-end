@@ -18,10 +18,10 @@ con.connect(function(err){
 
 router.post('/create', async function (req, res, next) {
   try {
-    let { date, time, email, description } = req.body; 
-        const sql = `Insert Into meetings (meetingdate, meetingtime, customeremail, meetingdescription) VALUES ( ?, ?, ?, ? )`
+    let { status, date, time, email, description } = req.body; 
+        const sql = `Insert Into meetings (status, meetingdate, meetingtime, customeremail, meetingdescription) VALUES ( ?, ?, ?, ?, ? )`
         con.query(
-          sql, [date,time,email,description],
+          sql, [status,date,time,email,description],
         (err, result, fields) =>{
           if(err){
             console.log('error: ', err)
@@ -48,6 +48,7 @@ router.get('/get', async function (req, res, next){
         const meetingsArray = result.map((meeting)=> {
           return {
             meetingid: meeting.meetingid,
+            status: meeting.status,
             date: meeting.meetingdate,
             time: meeting.meetingtime,
             email: meeting.customeremail,
@@ -65,15 +66,15 @@ router.get('/get', async function (req, res, next){
 
 router.put('/update', async function (req, res, next){
   try{
-  let { meetingid, date, time, email, description } = req.body;
+  let { status, meetingid, date, time, email, description } = req.body;
   meetingid = Number(meetingid);
   console.log(req.body)
   const checkMeetingId = `Select * FROM meetings where meetingid = ?`;
   con.query(checkMeetingId, [meetingid], (err, result, fields)=> {
     console.log(result)
     if(result.length){
-      const sql = `UPDATE meetings SET meetingdate = ?, meetingtime = ?, customeremail = ?, meetingdescription = ? WHERE meetingid = ?`;
-      con.query(sql, [date, time, email, description, meetingid], (err, result, fields) => {
+      const sql = `UPDATE meetings SET status = ?, meetingdate = ?, meetingtime = ?, customeremail = ?, meetingdescription = ? WHERE meetingid = ?`;
+      con.query(sql, [status, date, time, email, description, meetingid], (err, result, fields) => {
         if(err){
           console.log('error: ', err)
           res.send({statu: 0, data: err})
