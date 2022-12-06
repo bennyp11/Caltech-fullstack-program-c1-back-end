@@ -1,0 +1,5 @@
+.env
+.env.testem
+/node_modules
+./node_modules
+node_modules

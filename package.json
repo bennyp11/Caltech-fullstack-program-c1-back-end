@@ -1,0 +1,21 @@
+{
+  "name": "course-1-project",
+  "version": "1.0.0",
+  "description": "back-end for project management app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Benjamin Pollock",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20",
+    "util": "^0.12.5"
+  }
+}
